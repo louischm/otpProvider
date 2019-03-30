@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: otp-provider
+  datasource:
+    url: jdbc:postgresql://localhost:5432/otpprovider
+    username: otpadmin
+    password: 0tp4dm1n
+    platform: POSTGRESQL
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+server:
+  port: 3010
+
+secretkey: "bestSecretKey"
