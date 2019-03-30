@@ -39,7 +39,7 @@ public class OtpService {
     @Transactional
     public void deleteOtp(Otp otp) {
         try {
-            Thread.sleep(3000L);
+            Thread.sleep(30000L);
         } catch (InterruptedException e) {
             log.error("Error catch during sleep {}", e.getMessage());
         }
