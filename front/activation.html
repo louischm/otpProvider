@@ -123,9 +123,8 @@ $(document).ready(function(){
 	$('[data-toggle="tooltip"]').tooltip();
 	var actions =   '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +                    
                     '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
-    //                '<a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
-    //$("table td:last-child").html();
 	// Append table with add row form on add new button click
+    var oid = Math.floor(Math.random() * 101);
     $(".add-new").click(function(){
 		$(this).attr("disabled", "disabled");
 		var index = $("table tbody tr:last-child").index();
@@ -149,10 +148,12 @@ $(document).ready(function(){
                     'serviceName': document.getElementById('serviceName').value};
         var myJSON = JSON.stringify(myObj);
         console.log(myJSON);
-        /*window.fetch('localhost:3010/opt/activation', {
+
+        window.fetch('localhost:3010/opt/activation', {
             method: 'POST',
             body: myJSON,
-        }).then(resolve, reject);*/
+        }).then(function(response){alert(response)});
+
         input.each(function(){
 			if(!$(this).val()){
 				$(this).addClass("error");
@@ -171,14 +172,6 @@ $(document).ready(function(){
 		}
 
     });
-	/* Edit row on edit button click
-	$(document).on("click", ".edit", function(){		
-        $(this).parents("tr").find("td:not(:last-child)").each(function(){
-			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
-		});		
-		$(this).parents("tr").find(".add, .edit").toggle();
-		$(".add-new").attr("disabled", "disabled");
-    });*/
 	// Delete row on delete button click
 	$(document).on("click", ".delete", function(){
         $(this).parents("tr").remove();
@@ -465,20 +458,47 @@ function registration() {
     formData.append("username", document.getElementById('username').value);
     formData.append("password", pass);
 
-    for (var value of formData.values()) {
-        console.log(value);
-    }
+    //REQUETE A DECOMMENTER POUR LA REGISTRATION
     var request = new XMLHttpRequest();
     request.open("POST", "http://localhost:3010/otp/user");
     request.send(formData);
-    var oid = request.response.getKey("oid");
-    console.log(oid);
+
     return false;
 }
+
+function user_registration() {
+    var myObj = {'UserName': document.getElementById('user').value,
+        'Password': document.getElementById('pass').value};
+    var myJSON = JSON.stringify(myObj);
+    console.log(myJSON);
+    //REQUETE A DECOMMENTER POUR SERVICE REGISTRATION
+    window.fetch('http://localhost:3418/api/values/RegisterNewUserName', {
+        method: 'POST',
+        body: myJSON,
+    }).then(resolve, reject);
+
+    return false;
+}
+
 </script>
 </head>
 <body>
     <div class="container">
+        <div class="login-form">
+            <form onsubmit="return user_registration();" method="post">
+                <h2 class="text-center">Service Registration</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="user" placeholder="Username" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="pass" placeholder="Password" required="required">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </div>
+            </form>
+        </div>
+
         <div class="login-form">
             <form onsubmit="return registration();" method="post">
                 <h2 class="text-center">OTP Registration</h2>       
