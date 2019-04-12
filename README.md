@@ -1,27 +1,29 @@
-# Modules
+# Otp Provider
+Little otp provider made from scratch with Spring boot, Hibernate and PostgreSQL.
 
-## Front
+## Requirements
 
-The front is stored in the `front` directory.
+* Jdk 1.8 or later.
+* Maven 4
+* PostgreSQL 9.5
 
-There's a `README.md` in this directory telling you how to start the front.
+## Build
 
-## Service provider
+### Database
 
-The service provider is stored in the `OTP-SP` directory.
+In order to make this project work you'll need to create and setup a postgresql database:
 
-There's a `README.md` in this directory telling you how to run the service provider.
+Here is the command line via shell to do it : 
+`sudo -u postgres psql
+ postgres=# create database otpprovider;
+ postgres=# create user otpadmin with encrypted password '0tp4dm1n';
+ postgres=# grant all privileges on database otpprovider to otpadmin;`
 
-## Otp provider
+So you need a database named `otpprovider` with an user `otpadmin` with the password `0tp4dm1n`
 
-The otp provider is stored in the `otpProvider` directory.
 
-There's a `README.md` in this directory telling you how to run the Otp provider.
+### Running the app
 
-### Authors
+Run the app via this command line in the root directory:
 
-* Adrien Seguin (adrien.seguin@epitech.eu)
-* Nicolas Gautherin (nicolas.gautherin@epitech.eu)
-* Maxime Marcuccilli (maxime.marcuccilli@epitech.eu)
-* Baptiste Blin (baptiste.blin@epitech.eu)
-* Louis Chaumier (louis.chaumier@epitech.eu)
+`mvn spring-boot:run`
