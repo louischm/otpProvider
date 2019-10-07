@@ -14,10 +14,10 @@ Little otp provider made from scratch with Spring boot, Hibernate and PostgreSQL
 In order to make this project work you'll need to create and setup a postgresql database:
 
 Here is the command line via shell to do it : 
-`sudo -u postgres psql
- postgres=# create database otpprovider;
- postgres=# create user otpadmin with encrypted password '0tp4dm1n';
- postgres=# grant all privileges on database otpprovider to otpadmin;`
+* `sudo -u postgres psql`
+* `postgres=# create database otpprovider;`
+* `postgres=# create user otpadmin with encrypted password '0tp4dm1n';`
+* `postgres=# grant all privileges on database otpprovider to otpadmin;`
 
 So you need a database named `otpprovider` with an user `otpadmin` with the password `0tp4dm1n`
 
